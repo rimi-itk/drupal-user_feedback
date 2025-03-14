@@ -1,0 +1,7 @@
+name: 'User feedback'
+type: module
+description: 'Collects user feedback'
+package: Custom
+core_version_requirement: ^10 || ^11
+
+configure: user_feedback.settings

@@ -1,0 +1,82 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  desc: Run npm
+  npm:
+    cmds:
+    - docker compose run --rm node npm {{.CLI_ARGS}}
+  silent: true
+
+  assets:build:
+    desc: "Build assets"
+    cmds:
+      - task npm -- install
+      - task npm -- run build
+
+  assets:build:watch:
+    desc: "Build assets and watch for changes"
+    cmds:
+      - task npm -- install
+      - task npm -- run watch
+
+  code-analysis:php:
+    desc: "Run static code analysis on PHP"
+    cmds:
+      - ./scripts/code-analysis
+
+  lint:assets:
+    desc: "Lint assets"
+    cmds:
+      - task npm -- install
+      - docker compose run --rm prettier --write assets
+      - docker compose run --rm prettier --check assets
+
+  lint:composer:
+    desc: "Lint composer"
+    cmds:
+      - task compose -- run --rm php composer install
+      - task compose -- run --rm php composer validate
+      - task compose -- run --rm php composer normalize
+
+  lint:markdown:
+    desc: "Lint Markdown"
+    cmds:
+      - task compose -- run --rm markdownlint markdownlint '**/*.md' --fix
+      - task compose -- run --rm markdownlint markdownlint '**/*.md'
+
+  lint:php:
+    desc: "Lint PHP"
+    cmds:
+      - task compose -- run --rm php composer install
+      - task compose -- run --rm php vendor/bin/phpcbf --standard=phpcs.xml.dist
+      - task compose -- run --rm php vendor/bin/phpcs --standard=phpcs.xml.dist
+
+  lint:twig:
+    desc: "Lint Twig"
+    cmds:
+      - task compose -- run --rm php composer install
+      - task compose -- run --rm php vendor/bin/twig-cs-fixer fix templates
+      - task compose -- run --rm php vendor/bin/twig-cs-fixer check templates
+
+  lint:
+    desc: "Run all lint tasks"
+    cmds:
+      - for:
+          - lint:assets
+          - lint:composer
+          - lint:php
+          - lint:twig
+        cmd: task {{.ITEM}}
+    silent: true
+
+  compose:
+    cmds:
+      - docker compose {{.CLI_ARGS}}
+    silent: true
+
+  default:
+    cmds:
+      - task --list
+    silent: true

@@ -1,0 +1,17 @@
+user_feedback.send:
+  path: '/user-feedback'
+  methods:
+    - POST
+  defaults:
+    _title: 'User feedback'
+    _controller: '\Drupal\user_feedback\Controller\UserFeedbackController::send'
+  requirements:
+    _permission: 'send user feedback'
+
+user_feedback.settings:
+  path: '/admin/user-feedback'
+  defaults:
+    _title: 'Settings'
+    _form: 'Drupal\user_feedback\Form\SettingsForm'
+  requirements:
+    _permission: 'administer user feedback configuration'
