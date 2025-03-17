@@ -1,0 +1,13 @@
+
+services:
+  _defaults:
+    autowire: true
+
+  logger.channel.user_feedback:
+    parent: logger.channel_base
+    arguments:
+     - 'user_feedback'
+
+  Drupal\user_feedback\EventListener\UserFeedbackListener:
+    tags:
+      - { name: event_subscriber }

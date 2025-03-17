@@ -1,0 +1,44 @@
+{% macro element_id(id) -%}
+  user-feedback-widget{{ id ? '-' ~ id }}
+{%- endmacro %}
+
+{{ wrapper_scripts|join|raw }}
+{{ wrapper_stylesheets|join|raw }}
+
+ <div id="{{ _self.element_id() }}" data-config="{{ config|json_encode }}">
+   {# https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM #}
+   <template shadowrootmode="open">
+     {{ widget_scripts|join|raw }}
+     {{ widget_stylesheets|join|raw }}
+     <div id="{{ _self.element_id('root') }}" class="container-fluid">
+       <div id="messages"></div>
+
+       <form>
+         <div class="mb-3 form-required">
+           <label for="form-message" class="form-label">{{ 'Message'|trans({}, {context: 'user_feedback'}) }}</label>
+           <textarea required class="form-control" id="form-message" rows="3" name="message" placeholder="{{ 'Write your feedback message here'|trans({}, {context: 'user_feedback'}) }}" aria-describedby="form-message-help">xxx</textarea>
+           <div id="form-message-help" class="form-text">{{ 'Write a short and precise message'|trans({}, {context: 'user_feedback'}) }}</div>
+         </div>
+
+         <div class="form-check">
+           <input class="form-check-input" type="checkbox" value="" id="form-include-screenshot" name="include-screenshot" checked>
+           <label class="form-check-label" for="form-include-screenshot">{{ 'Include screenshot'|trans({}, {context: 'user_feedback'}) }}</label>
+         </div>
+
+         <div class="mb-3">
+           <label for="form-file" class="form-label">{{ 'File'|trans({}, {context: 'user_feedback'}) }}</label>
+           <input class="form-control" type="file" id="form-file" name="file"/>
+         </div>
+
+         <button type="submit" class="btn btn-primary">{{ 'Send feedback'|trans({}, {context: 'user_feedback'}) }}</button>
+       </form>
+
+       {#
+  <form id="{{ _self.element_id('form') }}">
+    <textarea name="message" placeholder="{{ 'Enter message'|trans({}, {context: 'user_feedback'}) }}" required></textarea>
+    <button id="{{ _self.element_id('send') }}">{{ 'Send feedback'|trans({}, {context: 'user_feedback'}) }}</button>
+  </form>
+  #}
+     </div>
+</template>
+ </div>

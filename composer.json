@@ -1,0 +1,45 @@
+{
+    "name": "itk-dev/user_feedback",
+    "description": "user feedback from Drupal",
+    "license": "MIT",
+    "type": "drupal-module",
+    "authors": [
+        {
+            "name": "Mikkel Ricky",
+            "email": "rimi@aarhus.dk"
+        }
+    ],
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "drupal/coder": "^8.3",
+        "ergebnis/composer-normalize": "^2.45",
+        "friendsofphp/php-cs-fixer": "^3.72",
+        "mglaman/phpstan-drupal": "^1.3",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^1.12",
+        "phpstan/phpstan-deprecation-rules": "^1.2",
+        "vincentlanglet/twig-cs-fixer": "^3.5"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "phpstan/extension-installer": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "coding-standards-apply": [
+            "@coding-standards-apply/phpcs"
+        ],
+        "coding-standards-apply/phpcs": [
+            "vendor/bin/phpcbf --standard=phpcs.xml.dist"
+        ],
+        "coding-standards-check": [
+            "@coding-standards-check/phpcs"
+        ],
+        "coding-standards-check/phpcs": [
+            "vendor/bin/phpcs --standard=phpcs.xml.dist"
+        ]
+    }
+}

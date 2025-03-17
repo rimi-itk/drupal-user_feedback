@@ -1,0 +1,20 @@
+{
+  "entrypoints": {
+    "widget": {
+      "css": [
+        "/build/widget.css"
+      ],
+      "js": [
+        "/build/widget.js"
+      ]
+    },
+    "widget_wrapper": {
+      "css": [
+        "/build/widget_wrapper.css"
+      ],
+      "js": [
+        "/build/widget_wrapper.js"
+      ]
+    }
+  }
+}

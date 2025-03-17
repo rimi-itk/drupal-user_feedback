@@ -1,0 +1,14 @@
+parameters:
+  paths:
+    - .
+  level: 9
+  customRulesetUsed: true
+  reportUnmatchedIgnoredErrors: false
+  excludePaths:
+    - node_modules
+    - vendor
+  ignoreErrors:
+    - '#Method Drupal\\user_feedback\\.+ return type has no value type specified in iterable type array.#'
+    - '#Method Drupal\\user_feedback\\.+ has parameter \$.+ with no value type specified in iterable type array.#'
+    - '#Function user_feedback_theme\(\) return type has no value type specified in iterable type array.#'
+    - '#Function user_feedback_theme\(\) has parameter \$.+ with no value type specified in iterable type array.#'

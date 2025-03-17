@@ -1,0 +1,13 @@
+// https://getbootstrap.com/docs/5.0/customize/sass/#importing
+@import "~bootstrap/scss/bootstrap";
+
+#user-feedback-widget-root {
+  background: #eee;
+  outline: solid 1px orange;
+  padding: 1em;
+}
+
+.form-required .form-label:after {
+  content: "*";
+  color: red;
+}
